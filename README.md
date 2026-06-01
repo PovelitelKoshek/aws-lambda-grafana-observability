@@ -13,13 +13,12 @@ The project consists of two parts:
 
 ## General architecture
 
-
+```text
 Logs:
 AWS Lambda → Custom Lambda Extension → AWS Lambda Telemetry API → Loki HTTP Push API → Grafana Cloud Loki
 
 Traces and Metrics:
 AWS Lambda Go code → OpenTelemetry SDK → Grafana Cloud OTLP endpoint → Grafana Cloud Traces / Tempo + Metrics / Mimir
-
 Repository structure
 docs/
   Documentation, architecture, sources, Grafana queries and conclusions.
