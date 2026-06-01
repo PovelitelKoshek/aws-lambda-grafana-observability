@@ -4,7 +4,7 @@ This directory contains the custom Go Lambda Extension used to send AWS Lambda l
 
 ## Data flow
 
-```text
+```
 AWS Lambda
     ↓
 Custom Lambda Extension
@@ -14,7 +14,9 @@ AWS Lambda Telemetry API
 Loki HTTP Push API
     ↓
 Grafana Cloud Loki
-Main idea
+```
+
+## Main idea
 
 The extension subscribes to AWS Lambda Telemetry API and receives function/platform logs.
 
