@@ -39,12 +39,11 @@ lambda_simulated_work_ms
 lambda4_go_demo_handler
 
 ## Build
+```
 go mod tidy
-
 go build -o bootstrap .
-
 zip lambda-go-otel-grafana.zip bootstrap
-
+```
 
 ## Environment variables
 OTEL_SERVICE_NAME
