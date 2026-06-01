@@ -6,10 +6,11 @@ This file contains PromQL and TraceQL queries used in Grafana Cloud.
 
 Example datasource name:
 
-```text
+```
 grafanacloud-...-prom
 
-Find all project metrics:
+
+## All project metrics:
 
 {__name__=~"lambda4.*"}
 
