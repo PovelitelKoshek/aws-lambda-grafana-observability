@@ -2,9 +2,9 @@
 
 set -e
 
-FUNCTION_NAME="lambda-4-go-otel-grafana"
-ROLE_NAME="lambda-4-go-otel-grafana-role"
-ZIP_FILE="traces-metrics-otel/lambda-4-go-otel-grafana.zip"
+FUNCTION_NAME="lambda-go-otel-grafana"
+ROLE_NAME="lambda-go-otel-grafana-role"
+ZIP_FILE="traces-metrics-otel/lambda-go-otel-grafana.zip"
 
 cat > trust-policy.json <<'EOF'
 {
