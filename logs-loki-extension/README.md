@@ -4,7 +4,6 @@ This directory contains the custom Go Lambda Extension used to send AWS Lambda l
 
 ## Data flow
 
-```text
 AWS Lambda
     ↓
 Custom Lambda Extension
