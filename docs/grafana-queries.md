@@ -16,43 +16,43 @@ grafanacloud-...-prom
 Total invocations:
 
 ```
-sum(lambda4_requests_total)
+sum(lambda_requests_total)
 ```
 
 
 Invocation rate:
 ```
-sum(rate(lambda4_requests_total[5m]))
+sum(rate(lambda_requests_total[5m]))
 ```
 
 Total errors:
 ```
-sum(lambda4_errors_total)
+sum(lambda_errors_total)
 ```
 
 Error rate:
 ```
-sum(rate(lambda4_errors_total[5m]))
+sum(rate(lambda_errors_total[5m]))
 ```
 
 Cold starts:
 ```
-sum(lambda4_cold_starts_total)
+sum(lambda_cold_starts_total)
 ```
 
 Average Lambda duration:
 ```
-sum(rate(lambda4_duration_ms_sum[5m])) / sum(rate(lambda4_duration_ms_count[5m]))
+sum(rate(lambda_duration_ms_sum[5m])) / sum(rate(lambda_duration_ms_count[5m]))
 ```
 
 P95 Lambda duration:
 ```
-histogram_quantile(0.95, sum(rate(lambda4_duration_ms_bucket[5m])) by (le))
+histogram_quantile(0.95, sum(rate(lambda_duration_ms_bucket[5m])) by (le))
 ```
 
 Average simulated work duration:
 ```
-sum(rate(lambda4_simulated_work_ms_sum[5m])) / sum(rate(lambda4_simulated_work_ms_count[5m]))
+sum(rate(lambda_simulated_work_ms_sum[5m])) / sum(rate(lambda_simulated_work_ms_count[5m]))
 ```
 
 ## Traces datasource
