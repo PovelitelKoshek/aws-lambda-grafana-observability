@@ -4,7 +4,8 @@ This file contains the main AWS CloudShell commands used during the project.
 
 ## Build Go Lambda for traces and metrics
 
-```bash
+```
+bash
 cd ~/lambda-go-otel-grafana
 
 go mod tidy
@@ -12,7 +13,11 @@ go mod tidy
 go build -o bootstrap .
 
 zip lambda-go-otel-grafana.zip bootstrap
-Create IAM trust policy
+```
+
+## Create IAM trust policy
+
+```
 cat > trust-policy.json <<'EOF'
 {
   "Version": "2012-10-17",
@@ -27,7 +32,10 @@ cat > trust-policy.json <<'EOF'
   ]
 }
 EOF
-Create IAM role
+```
+
+## Create IAM role
+```
 aws iam create-role \
   --role-name lambda-go-otel-grafana-role \
   --assume-role-policy-document file://trust-policy.json
@@ -42,8 +50,10 @@ ROLE_ARN=$(aws iam get-role \
   --output text)
 
 echo $ROLE_ARN
-Create Lambda function
-aws lambda create-function \
+```
+
+## Create Lambda function
+``` aws lambda create-function \
   --function-name lambda-go-otel-grafana \
   --runtime provided.al2023 \
   --handler bootstrap \
@@ -53,14 +63,18 @@ aws lambda create-function \
   --timeout 10 \
   --memory-size 512
 Configure environment variables
+```
 
-Grafana Cloud provides:
+## Grafana Cloud provides:
 
+```
 OTEL_EXPORTER_OTLP_ENDPOINT
 OTEL_EXPORTER_OTLP_HEADERS
+```
 
-Example environment configuration:
+## Example environment configuration:
 
+```
 cat > env.json <<EOF
 {
   "Variables": {
@@ -73,59 +87,61 @@ cat > env.json <<EOF
   }
 }
 EOF
+```
 
-Apply environment variables:
+## Apply environment variables:
 
+```
 aws lambda update-function-configuration \
   --function-name lambda-go-otel-grafana \
   --environment file://env.json
-Invoke Lambda
+```
 
-Create test event:
-
+## Create test event:
+```
 cat > event.json <<'EOF'
 {
   "hello": "grafana",
   "test": "lambda-go"
 }
 EOF
+```
 
-Invoke Lambda:
+## Invoke Lambda:
 
+```
 aws lambda invoke \
   --function-name lambda-go-otel-grafana \
   --payload fileb://event.json \
   response.json
+```
 
-Run multiple invocations:
+## Run multiple invocations:
 
+```
 for i in {1..10}; do
   aws lambda invoke \
     --function-name lambda-go-otel-grafana \
     --payload fileb://event.json \
     response-$i.json
 done
+```
 
-Create error test event:
+## Create error test event:
 
+```
 cat > fail-event.json <<'EOF'
 {
   "fail": true
 }
 EOF
+```
 
-Invoke error test:
-
+## Invoke error test:
+```
 aws lambda invoke \
   --function-name lambda-go-otel-grafana \
   --payload fileb://fail-event.json \
   fail-response.json
 Notes
-
-The following files should not be committed to GitHub:
-
-env.json
-bootstrap
-*.zip
-response.json
-fail-response.json
+```
