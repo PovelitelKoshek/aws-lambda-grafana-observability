@@ -1,0 +1,23 @@
+# Build artifacts
+bootstrap
+*.zip
+
+# Environment and secrets
+.env
+env.json
+
+# AWS output files
+response.json
+response-*.json
+fail-response.json
+fail-response-*.json
+event.json
+fail-event.json
+
+# Logs
+*.log
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
