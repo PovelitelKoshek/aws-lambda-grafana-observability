@@ -44,21 +44,21 @@ func main() {
 
 	extensionID, err := registerExtension(runtimeAPI, extensionName)
 	if err != nil {
-		log.Printf("TEST3_EXTENSION: register error: %v", err)
+		log.Printf("TEST_EXTENSION: register error: %v", err)
 		return
 	}
 
-	log.Println("TEST3_EXTENSION: registered successfully")
+	log.Println("TEST_EXTENSION: registered successfully")
 
 	startTelemetryListener()
 
 	err = subscribeTelemetry(runtimeAPI, extensionID)
 	if err != nil {
-		log.Printf("TEST3_EXTENSION: telemetry subscribe error: %v", err)
+		log.Printf("TEST_EXTENSION: telemetry subscribe error: %v", err)
 		return
 	}
 
-	log.Println("TEST3_EXTENSION: telemetry subscribed successfully")
+	log.Println("TEST_EXTENSION: telemetry subscribed successfully")
 
 	for {
 		eventType, err := nextEvent(runtimeAPI, extensionID)
@@ -120,14 +120,14 @@ func startTelemetryListener() {
 
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
-			log.Printf("TEST3_EXTENSION: read telemetry body error: %v", err)
+			log.Printf("TEST_EXTENSION: read telemetry body error: %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 
 		var events []TelemetryEvent
 		if err := json.Unmarshal(body, &events); err != nil {
-			log.Printf("TEST3_EXTENSION: telemetry json error: %v body=%s", err, string(body))
+			log.Printf("TEST_EXTENSION: telemetry json error: %v body=%s", err, string(body))
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
@@ -142,7 +142,7 @@ func startTelemetryListener() {
 	})
 
 	go func() {
-		log.Println("TEST3_EXTENSION: listener started on port " + listenerPort)
+		log.Println("TEST_EXTENSION: listener started on port " + listenerPort)
 		err := http.ListenAndServe(":"+listenerPort, nil)
 		if err != nil {
 			log.Printf("TEST3_EXTENSION: listener error: %v", err)
@@ -281,7 +281,7 @@ func sendEventToLoki(event TelemetryEvent) {
 
 	req, err := http.NewRequest("POST", lokiURL, bytes.NewBuffer(jsonBody))
 	if err != nil {
-		log.Printf("TEST3_EXTENSION: loki request error: %v", err)
+		log.Printf("TEST_EXTENSION: loki request error: %v", err)
 		return
 	}
 
@@ -302,11 +302,11 @@ func sendEventToLoki(event TelemetryEvent) {
 	respBody, _ := io.ReadAll(resp.Body)
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		log.Printf("TEST3_EXTENSION: loki bad response: %s body=%s", resp.Status, string(respBody))
+		log.Printf("TEST_EXTENSION: loki bad response: %s body=%s", resp.Status, string(respBody))
 		return
 	}
 
-	log.Printf("TEST3_EXTENSION: sent event to Loki, type=%s", event.Type)
+	log.Printf("TEST_EXTENSION: sent event to Loki, type=%s", event.Type)
 }
 
 func stringifyRecord(record interface{}) string {
