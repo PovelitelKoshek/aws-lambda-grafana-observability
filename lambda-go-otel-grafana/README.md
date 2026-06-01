@@ -4,7 +4,7 @@ This directory contains the Go Lambda function that sends traces and metrics dir
 
 ## Data flow
 
-```text
+```
 AWS Lambda Go code
     ↓
 OpenTelemetry SDK
@@ -14,11 +14,13 @@ Grafana Cloud OTLP endpoint
 Grafana Cloud Traces / Tempo
     ↓
 Grafana Cloud Metrics / Mimir
-Main idea
+```
+
+## Main idea
 
 OpenTelemetry SDK is initialized directly inside the Lambda code.
 
-The Lambda creates:
+## The Lambda creates:
 
 trace span for handler execution
 request counter
@@ -30,16 +32,16 @@ Metrics
 lambda_requests_total
 lambda_errors_total
 lambda_cold_starts_total
-lambda4_duration_ms
+lambda_duration_ms
 lambda_simulated_work_ms
 
-Trace span
+## Trace span
 lambda4_go_demo_handler
 
-Build
+## Build
 go mod tidy
 go build -o bootstrap .
-zip lambda-4-go-otel-grafana.zip bootstrap
+zip lambda-go-otel-grafana.zip bootstrap
 
 Environment variables
 OTEL_SERVICE_NAME
