@@ -13,7 +13,7 @@ The project consists of two parts:
 
 ## General architecture
 
-```text
+
 Logs:
 AWS Lambda → Custom Lambda Extension → AWS Lambda Telemetry API → Loki HTTP Push API → Grafana Cloud Loki
 
@@ -100,9 +100,6 @@ The architecture does not require EC2, VM, self-hosted Alloy, or a separate Open
 
 Original separate repositories
 
-These two parts were originally implemented as separate repositories:
 
-aws-lambda-grafana-loki-extension
-lambda-go-otel-grafana
 
 This repository combines both parts into one centralized project.
