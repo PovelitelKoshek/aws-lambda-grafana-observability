@@ -13,56 +13,47 @@ The project consists of two parts:
 
 ## General architecture
 
-```text
+```
 Logs:
 AWS Lambda → Custom Lambda Extension → AWS Lambda Telemetry API → Loki HTTP Push API → Grafana Cloud Loki
 
 Traces and Metrics:
 AWS Lambda Go code → OpenTelemetry SDK → Grafana Cloud OTLP endpoint → Grafana Cloud Traces / Tempo + Metrics / Mimir
+```
+
 Repository structure
-docs/
-  Documentation, architecture, sources, Grafana queries and conclusions.
 
-logs-loki-extension/
-  Custom Go Lambda Extension for sending Lambda logs directly to Grafana Cloud Loki.
+docs/```
+Documentation, architecture, sources, Grafana queries and conclusions.```
 
-traces-metrics-otel/
-  Go Lambda function with OpenTelemetry SDK for sending traces and metrics directly to Grafana Cloud OTLP endpoint.
+logs-loki-extension/```
+Custom Go Lambda Extension for sending Lambda logs directly to Grafana Cloud Loki.```
 
-scripts/
-  Shell scripts and CloudShell commands used for build, deploy and testing.
-Part 1: Logs to Loki
+traces-metrics-otel/```
+Go Lambda function with OpenTelemetry SDK for sending traces and metrics directly to Grafana Cloud OTLP endpoint.```
+
+scripts/```
+Shell scripts and CloudShell commands used for build, deploy and testing.```
+
+## Part 1: Logs to Loki
 
 The first part of the project is a custom AWS Lambda Extension written in Go.
 
 The extension subscribes to AWS Lambda Telemetry API, receives function and platform logs, formats them and sends them directly to Grafana Cloud Loki through Loki HTTP Push API.
 
-AWS Lambda
-    ↓
-Custom Go Lambda Extension
-    ↓
-AWS Lambda Telemetry API
-    ↓
-Grafana Cloud Loki
+```AWS Lambda > Custom Go Lambda Extension > AWS Lambda Telemetry API > Grafana Cloud Loki```
 
 This part is stored in:
 
 logs-loki-extension/
-Part 2: Traces and Metrics through OTLP
+
+## Part 2: Traces and Metrics through OTLP
 
 The second part of the project is a Go Lambda function with OpenTelemetry SDK embedded directly into the main function code.
 
 The function creates traces and custom metrics, then sends them directly to Grafana Cloud OTLP endpoint.
 
-AWS Lambda Go function
-    ↓
-OpenTelemetry SDK
-    ↓
-Grafana Cloud OTLP endpoint
-    ↓
-Grafana Cloud Traces / Tempo
-    ↓
-Grafana Cloud Metrics / Mimir
+```AWS Lambda Go function > OpenTelemetry SDK  > Grafana Cloud OTLP endpoint  > Grafana Cloud Traces / Tempo  > Grafana Cloud Metrics / Mimir```
 
 This part is stored in:
 
@@ -77,6 +68,7 @@ Traces
 The Lambda function creates a trace span for handler execution:
 
 lambda_go_demo_handler
+
 Metrics
 
 The Lambda function sends custom metrics:
@@ -86,7 +78,8 @@ lambda_errors_total
 lambda_cold_starts_total
 lambda_duration_ms
 lambda_simulated_work_ms
-Result
+
+## Result
 
 The proof-of-concept confirmed that AWS Lambda can send telemetry directly to Grafana Cloud.
 
