@@ -40,13 +40,22 @@ lambda4_go_demo_handler
 
 ## Build
 go mod tidy
+
 go build -o bootstrap .
+
 zip lambda-go-otel-grafana.zip bootstrap
 
-Environment variables
+
+## Environment variables
 OTEL_SERVICE_NAME
+
 OTEL_EXPORTER_OTLP_ENDPOINT
+
 OTEL_EXPORTER_OTLP_PROTOCOL
+
 OTEL_EXPORTER_OTLP_HEADERS
+
 OTEL_TRACES_SAMPLER
+
 OTEL_RESOURCE_ATTRIBUTES
+
