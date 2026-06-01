@@ -98,9 +98,3 @@ traces → grafanacloud-...-traces
 metrics → grafanacloud-...-prom
 
 The architecture does not require EC2, VM, self-hosted Alloy, or a separate OpenTelemetry Collector server.
-
-Original separate repositories
-
-
-
-This repository combines both parts into one centralized project.
