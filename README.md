@@ -63,13 +63,13 @@ Logs
 
 Collected through AWS Lambda Telemetry API and sent to Loki.
 
-Traces
+## Traces
 
 The Lambda function creates a trace span for handler execution:
 
 lambda_go_demo_handler
 
-Metrics
+## Metrics
 
 The Lambda function sends custom metrics:
 
