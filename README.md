@@ -53,7 +53,7 @@ The second part of the project is a Go Lambda function with OpenTelemetry SDK em
 
 The function creates traces and custom metrics, then sends them directly to Grafana Cloud OTLP endpoint.
 
-```AWS Lambda Go function > OpenTelemetry SDK  > Grafana Cloud OTLP endpoint  > Grafana Cloud Traces / Tempo  > Grafana Cloud Metrics / Mimir```
+```AWS Lambda Go function > OpenTelemetry SDK  > Grafana Cloud OTLP endpoint  > Grafana Cloud Traces  > Grafana Cloud Metrics```
 
 This part is stored in:
 
