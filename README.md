@@ -19,6 +19,7 @@ AWS Lambda → Custom Lambda Extension → AWS Lambda Telemetry API → Loki HTT
 
 Traces and Metrics:
 AWS Lambda Go code → OpenTelemetry SDK → Grafana Cloud OTLP endpoint → Grafana Cloud Traces / Tempo + Metrics / Mimir
+
 Repository structure
 docs/
   Documentation, architecture, sources, Grafana queries and conclusions.
