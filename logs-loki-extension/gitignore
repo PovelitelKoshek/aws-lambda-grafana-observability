@@ -1,0 +1,14 @@
+# Build artifacts
+build/
+layer/
+bootstrap
+test3-loki-extension
+*.zip
+
+# Environment files
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
