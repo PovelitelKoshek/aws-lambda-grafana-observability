@@ -106,9 +106,3 @@ aws-lambda-grafana-loki-extension
 lambda-go-otel-grafana
 
 This repository combines both parts into one centralized project.
-
-
-Потом нажми:
-
-```text
-Commit changes
