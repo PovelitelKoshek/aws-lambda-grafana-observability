@@ -33,8 +33,8 @@ type Response struct {
 }
 
 var (
-	tracer = otel.Tracer("lambda-4-go-tracer")
-	meter  = otel.Meter("lambda-4-go-meter")
+	tracer = otel.Tracer("lambda-go-tracer")
+	meter  = otel.Meter("lambda-go-meter")
 
 	requestCounter        otelmetric.Int64Counter
 	errorCounter          otelmetric.Int64Counter
@@ -91,19 +91,19 @@ func initOpenTelemetry(ctx context.Context) error {
 	)
 	otel.SetMeterProvider(metricProvider)
 
-	meter = otel.Meter("lambda-4-go-meter")
-	tracer = otel.Tracer("lambda-4-go-tracer")
+	meter = otel.Meter("lambda-go-meter")
+	tracer = otel.Tracer("lambda-go-tracer")
 
 	requestCounter, err = meter.Int64Counter(
-		"lambda4_requests_total",
-		otelmetric.WithDescription("Total Lambda 4 requests"),
+		"lambda_requests_total",
+		otelmetric.WithDescription("Total Lambda requests"),
 	)
 	if err != nil {
 		return err
 	}
 
 	errorCounter, err = meter.Int64Counter(
-		"lambda4_errors_total",
+		"lambda_errors_total",
 		otelmetric.WithDescription("Total Lambda 4 errors"),
 	)
 	if err != nil {
@@ -111,16 +111,16 @@ func initOpenTelemetry(ctx context.Context) error {
 	}
 
 	coldStartCounter, err = meter.Int64Counter(
-		"lambda4_cold_starts_total",
-		otelmetric.WithDescription("Total Lambda 4 cold starts"),
+		"lambda_cold_starts_total",
+		otelmetric.WithDescription("Total Lambda cold starts"),
 	)
 	if err != nil {
 		return err
 	}
 
 	durationHistogram, err = meter.Float64Histogram(
-		"lambda4_duration_ms",
-		otelmetric.WithDescription("Lambda 4 handler duration in milliseconds"),
+		"lambda_duration_ms",
+		otelmetric.WithDescription("Lambda handler duration in milliseconds"),
 		otelmetric.WithUnit("ms"),
 	)
 	if err != nil {
@@ -128,7 +128,7 @@ func initOpenTelemetry(ctx context.Context) error {
 	}
 
 	workDurationHistogram, err = meter.Float64Histogram(
-		"lambda4_simulated_work_ms",
+		"lambda_simulated_work_ms",
 		otelmetric.WithDescription("Simulated Lambda 4 work duration in milliseconds"),
 		otelmetric.WithUnit("ms"),
 	)
@@ -143,7 +143,7 @@ func handler(ctx context.Context, event Event) (Response, error) {
 	start := time.Now()
 	isColdStart := coldStart
 
-	ctx, span := tracer.Start(ctx, "lambda4_go_demo_handler")
+	ctx, span := tracer.Start(ctx, "lambda_go_demo_handler")
 	defer span.End()
 
 	baseMetricAttrs := []attribute.KeyValue{
