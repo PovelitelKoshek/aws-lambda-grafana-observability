@@ -151,65 +151,7 @@ grafanacloud-...-prom
 The first test query was:
 
 ```
-{__name__=~"lambda4.*"}
+{__name__=~"lambda.*"}
 ```
 
 This helped find all custom metrics sent by the Lambda function.
-
-## Issue 6: Metrics needed to be more meaningful
-
-The first working version mainly proved that OpenTelemetry export worked.
-
-After that, custom metrics were improved to make Grafana dashboards more useful.
-
-The Lambda function was updated to send:
-
-```
-lambda4_requests_total
-lambda4_errors_total
-lambda4_cold_starts_total
-lambda4_duration_ms
-lambda4_simulated_work_ms
-```
-
-These metrics allow building dashboards for:
-
-```
-total requests
-request rate
-errors
-cold starts
-average duration
-P95 duration
-```
-
-## Issue 7: Grafana dashboards
-
-After traces and metrics appeared in Grafana Cloud, dashboards were created separately for metrics and traces.
-
-Metrics dashboards:
-
-```
-Lambda 4 Metrics Overview
-Lambda 4 Metrics Performance
-```
-
-Traces dashboards:
-
-```
-Lambda 4 Traces Overview
-Lambda 4 Traces Errors and Slow Requests
-```
-
-This separation was useful because metrics and traces are different telemetry types and are stored in different Grafana Cloud backends.
-
-## Final result
-
-The project confirmed that direct telemetry delivery from AWS Lambda to Grafana Cloud works.
-
-The final result:
-```
-Logs → Loki
-Traces → Grafana Cloud Traces / Tempo
-Metrics → Grafana Cloud Metrics / Mimir
-```
