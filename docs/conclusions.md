@@ -37,6 +37,6 @@ Traces:
 Lambda Go code → OpenTelemetry SDK → OTLP endpoint → Tempo
 
 Metrics:
-Lambda Go code → OpenTelemetry SDK → OTLP endpoint → Metrics/Mimir
+Lambda Go code → OpenTelemetry SDK → OTLP endpoint → Metrics
 
 This approach keeps the architecture serverless and avoids maintaining an additional telemetry server.
