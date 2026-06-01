@@ -32,11 +32,11 @@ type LokiStream struct {
 }
 
 func main() {
-	log.Println("TEST3_EXTENSION: starting")
+	log.Println("TEST_EXTENSION: starting")
 
 	runtimeAPI := os.Getenv("AWS_LAMBDA_RUNTIME_API")
 	if runtimeAPI == "" {
-		log.Println("TEST3_EXTENSION: AWS_LAMBDA_RUNTIME_API is empty")
+		log.Println("TEST_EXTENSION: AWS_LAMBDA_RUNTIME_API is empty")
 		return
 	}
 
@@ -63,18 +63,18 @@ func main() {
 	for {
 		eventType, err := nextEvent(runtimeAPI, extensionID)
 		if err != nil {
-			log.Printf("TEST3_EXTENSION: next event error: %v", err)
+			log.Printf("TEST_EXTENSION: next event error: %v", err)
 			time.Sleep(500 * time.Millisecond)
 			continue
 		}
 
 		if eventType == "INVOKE" {
-			log.Println("TEST3_EXTENSION: invoke finished, waiting for telemetry delivery")
+			log.Println("TEST_EXTENSION: invoke finished, waiting for telemetry delivery")
 			time.Sleep(20 * time.Second)
 		}
 
 		if eventType == "SHUTDOWN" {
-			log.Println("TEST3_EXTENSION: shutdown")
+			log.Println("TEST_EXTENSION: shutdown")
 			time.Sleep(2 * time.Second)
 			return
 		}
@@ -132,7 +132,7 @@ func startTelemetryListener() {
 			return
 		}
 
-		log.Printf("TEST3_EXTENSION: received telemetry events: %d", len(events))
+		log.Printf("TEST_EXTENSION: received telemetry events: %d", len(events))
 
 		for _, event := range events {
 			sendEventToLoki(event)
@@ -145,7 +145,7 @@ func startTelemetryListener() {
 		log.Println("TEST_EXTENSION: listener started on port " + listenerPort)
 		err := http.ListenAndServe(":"+listenerPort, nil)
 		if err != nil {
-			log.Printf("TEST3_EXTENSION: listener error: %v", err)
+			log.Printf("TEST_EXTENSION: listener error: %v", err)
 		}
 	}()
 }
@@ -227,7 +227,7 @@ func sendEventToLoki(event TelemetryEvent) {
 	lokiToken := os.Getenv("GRAFANA_CLOUD_TOKEN")
 
 	if lokiURL == "" || lokiUsername == "" || lokiToken == "" {
-		log.Println("TEST3_EXTENSION: missing Loki environment variables")
+		log.Println("TEST_EXTENSION: missing Loki environment variables")
 		return
 	}
 
@@ -275,7 +275,7 @@ func sendEventToLoki(event TelemetryEvent) {
 
 	jsonBody, err := json.Marshal(payload)
 	if err != nil {
-		log.Printf("TEST3_EXTENSION: loki json marshal error: %v", err)
+		log.Printf("TEST_EXTENSION: loki json marshal error: %v", err)
 		return
 	}
 
@@ -294,7 +294,7 @@ func sendEventToLoki(event TelemetryEvent) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Printf("TEST3_EXTENSION: loki send error: %v", err)
+		log.Printf("TEST_EXTENSION: loki send error: %v", err)
 		return
 	}
 	defer resp.Body.Close()
