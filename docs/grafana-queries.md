@@ -7,7 +7,8 @@ This file contains PromQL and TraceQL queries used in Grafana Cloud.
 Example datasource name:
 
 ```
-grafanacloud-...-prom ```
+grafanacloud-...-prom
+```
 
 
 ## All project metrics:
