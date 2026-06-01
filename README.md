@@ -85,8 +85,10 @@ The proof-of-concept confirmed that AWS Lambda can send telemetry directly to Gr
 
 In Grafana Cloud:
 
+```
 logs   → Grafana Cloud Loki
 traces → grafanacloud-...-traces
 metrics → grafanacloud-...-prom
+```
 
 The architecture does not require EC2, VM, self-hosted Alloy, or a separate OpenTelemetry Collector server.
